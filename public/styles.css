@@ -1,0 +1,95 @@
+body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #5b7cfa;
+    font-family: Arial, sans-serif;
+}
+
+.upload-card {
+    background-color: white;
+    border-radius: 15px;
+    padding: 20px;
+    width: 300px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.upload-card h3 {
+    margin: 0 0 15px;
+    font-size: 16px;
+    color: #666;
+    text-transform: uppercase;
+}
+
+.drag-area {
+    border: 2px dashed #a3bffa;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    color: #666;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.drag-area span {
+    color: #5b7cfa;
+    cursor: pointer;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+.selected-file {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #333;
+}
+
+.upload-btn {
+    margin-top: 15px;
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #5b7cfa;
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: background-color 0.3s;
+}
+
+.upload-btn:disabled {
+    background-color: #a3bffa;
+    cursor: not-allowed;
+}
+
+.upload-btn.uploading::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 0%;
+    background-color: #3b5bdb;
+    z-index: 0;
+    transition: width 0.1s linear;
+}
+
+.upload-btn.uploading {
+    position: relative;
+    color: white;
+    background-color: #5b7cfa;
+    /* Ensure the background remains during upload */
+}
+
+.upload-btn span {
+    position: relative;
+    z-index: 1;
+    /* Ensure the text is above the ::before element */
+}
+

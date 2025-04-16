@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uploaded Files</title>
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background-color: #f5f5f5;
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h2 {
+            margin: 0 0 20px;
+            font-size: 20px;
+            color: #333;
+            text-align: center;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .file-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            font-size: 14px;
+            color: #555;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Uploaded Files</h2>
+        <div class="grid">
+            <!-- <div class="file-card">dailyui-day-031.psd</div>
+            <div class="file-card">styleguide-book.pdf</div>
+            <div class="file-card">logotype-monkey-glasses.png</div> -->
+        </div>
+    </div>
+</body>
+
+<script>
+    fetch('http://localhost:3030/files')
+            .then(res => res.json())
+            .then(files => {
+                const grid = document.querySelector('.grid');
+                grid.innerHTML = files.reverse().map(file => `<div class="file-card">${file}</div>`).join('');
+            });
+</script>
+
+</html>
