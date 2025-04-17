@@ -6,6 +6,7 @@ A File upload web server.
 
 import http from "node:http";
 import fs from "node:fs/promises";
+import { pipeline } from "node:stream";
 
 const PORT = 3030;
 
@@ -14,6 +15,10 @@ const server = http.createServer();
 
 //listen for incoming requests from client
 server.on("request", async (req, res) => {
+  /*
+
+*/
+
   if (req.method === "GET" && req.url === "/") {
     const fileHandler = await fs.open("./public/index.html", "r");
     const readStream = fileHandler.createReadStream();
@@ -51,6 +56,13 @@ server.on("request", async (req, res) => {
     const writeStream = writeFileHandler.createWriteStream();
 
     req.pipe(writeStream);
+
+    pipeline(req, writeStream, (err) => {
+      if (err) {
+        res.writeHead(500, { "Content-Type": "text/plain" });
+        res.end("Error Uploading file");
+      }
+    });
 
     req.on("end", () => {
       res.writeHead(200, { "Content-Type": "text/plain" });
